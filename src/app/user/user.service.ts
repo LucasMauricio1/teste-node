@@ -5,7 +5,14 @@ import { usersData } from 'src/database/usersData';
 
 @Injectable()
 export class UserService {
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User | null> {
+    const existingUser = usersData.find(
+      (user) => user.email === createUserDto.email,
+    );
+    if (existingUser) {
+      return null;
+    }
+
     const user: User = {
       ...createUserDto,
       id: usersData.length + 1,

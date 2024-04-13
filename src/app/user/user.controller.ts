@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
@@ -18,7 +19,11 @@ export class UserController {
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return await this.userService.createUser(createUserDto);
+    const newUser = await this.userService.createUser(createUserDto);
+    if (!newUser) {
+      throw new ConflictException('E-mail já cadastrado.');
+    }
+    return newUser;
   }
 
   @Get()
