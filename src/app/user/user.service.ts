@@ -19,4 +19,9 @@ export class UserService {
   async getAllUser(): Promise<User[]> {
     return usersData;
   }
+
+  async getUserById(userId: number): Promise<User> {
+    const user = usersData.find((user) => user.id === Number(userId));
+    return user;
+  }
 }
