@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   NotFoundException,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser';
@@ -28,15 +28,31 @@ export class UserController {
 
   @Get('/:userId')
   async getUserById(@Param('userId') userId: number): Promise<User> {
-    return await this.userService.getUserById(userId);
+    const user = await this.userService.getUserById(userId);
+    if (!user) {
+      throw new NotFoundException(`Usuário com ID ${userId} não encontrado.`);
+    }
+    return user;
   }
 
   @Delete('/:userId')
   async deleteUserById(@Param('userId') userId: number): Promise<any> {
     const result = await this.userService.deleteUserById(userId);
-    if (result.status === HttpStatus.NOT_FOUND) {
-      throw new NotFoundException(result.message);
+    if (!result) {
+      throw new NotFoundException(`Usuário com ID ${userId} não encontrado.`);
     }
     return { message: result.message };
+  }
+
+  @Patch('/:userId')
+  async updateUser(
+    @Param('userId') userId: number,
+    @Body() updateUserDto: Partial<User>,
+  ): Promise<User> {
+    const user = await this.userService.updateUser(userId, updateUserDto);
+    if (!user) {
+      throw new NotFoundException(`Usuário com ID ${userId} não encontrado.`);
+    }
+    return user;
   }
 }

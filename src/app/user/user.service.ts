@@ -13,29 +13,44 @@ export class UserService {
 
     usersData.push(user);
 
-    return user;
+    return {
+      ...user,
+      password: undefined,
+    };
   }
 
   async getAllUser(): Promise<User[]> {
     return usersData;
   }
 
-  async getUserById(userId: number): Promise<User> {
+  async getUserById(userId: number): Promise<User | null> {
     const user = usersData.find((user) => user.id === Number(userId));
-    return user;
+    return user || null;
   }
 
   async deleteUserById(
     userId: number,
-  ): Promise<{ status: number; message: string }> {
+  ): Promise<{ status: number; message: string } | null> {
     const userIndex = usersData.findIndex((user) => user.id === Number(userId));
     if (userIndex === -1) {
-      const message = `Usuário com ID ${userId} não encontrado.`;
-      console.log(message);
-      return { status: HttpStatus.NOT_FOUND, message };
+      return null;
     }
 
     usersData.splice(userIndex, 1);
     return { status: HttpStatus.OK, message: 'Usuário deletado com sucesso.' };
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: Partial<User>,
+  ): Promise<User | null> {
+    const userIndex = usersData.findIndex((user) => user.id === Number(userId));
+    if (userIndex === -1) {
+      return null;
+    }
+
+    const updatedUser = { ...usersData[userIndex], ...updateUserDto };
+    usersData[userIndex] = updatedUser;
+    return updatedUser;
   }
 }
