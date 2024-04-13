@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser';
 import { UserService } from './user.service';
 import { User } from './entity/userEntity';
@@ -20,5 +29,14 @@ export class UserController {
   @Get('/:userId')
   async getUserById(@Param('userId') userId: number): Promise<User> {
     return await this.userService.getUserById(userId);
+  }
+
+  @Delete('/:userId')
+  async deleteUserById(@Param('userId') userId: number): Promise<any> {
+    const result = await this.userService.deleteUserById(userId);
+    if (result.status === HttpStatus.NOT_FOUND) {
+      throw new NotFoundException(result.message);
+    }
+    return { message: result.message };
   }
 }
