@@ -20,10 +20,7 @@ export class UserService {
 
     usersData.push(user);
 
-    return {
-      ...user,
-      password: undefined,
-    };
+    return user;
   }
 
   async getAllUser(): Promise<User[]> {
