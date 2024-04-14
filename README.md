@@ -17,16 +17,16 @@ Os dados são armazenados em uma constante chamada usersData, ela já vem com um
     password: '1234',
 }
 
-Os services são responsáveis por tomar as decisões, quando acionados eles vão buscar, criar, deletar ou apagar dados dependendo da vontade do usuário.
+Os services são responsáveis por tomar as decisões, quando acionados eles vão buscar, criar, atualizar ou apagar dados dependendo da vontade do usuário.
 
-Os controllers vão ser os responsaveis de diferencias as requisições, seja elas get, post, etc...
+Os controllers vão ser os responsaveis de diferenciar as requisições, seja elas get, post, etc...
 Além disso é nos controller que são feitas as validações do body e também do retorno para o usuário, e caso o service pegue algum erro, é o controller o responsável por dizer isso ao usuário.
 
-Por fim a pasta strategies ficou responsável por toda a lógica da autorrização com o token gerado no login.
+Por fim a pasta strategies ficou responsável por toda a lógica da autorização com o token gerado no login.
 
 ## 📁 Paginas
 
-O sistema é composto por 6 enndpoints diferentes:
+O sistema é composto por 6 endpoints diferentes:
 
 - **Login: POST /auth** Nesta página, os usuários podem inserir seus dados cadastrados (email e senha) e fazer login para obter o token.
 - **Cadastro: POST /user** Nesta página, os usuários admin podem criar novos usuários.
@@ -34,6 +34,22 @@ O sistema é composto por 6 enndpoints diferentes:
 - **Listar um usuário: POST /user/:userId** Nesta pagina você vai obter os dados de um usuário específico passando seu ID.
 - **Editar um usuário: Path /user/:userId** Aqui você consegue editar seu usuário todo ou somente um atributo dele.
 - **Apagar um usuário: Delete /user/:userId** Esta ultima request permitira ao usuário logado deletar qualquer usuário pelo ID..
+
+Exemplo de body para login:
+{
+    "email": "admin@spsgroup.com.br",
+    "password": "1234"
+}
+
+Exemplo de body para cadastro:
+{
+    "name": "Teste",
+    "email": "teste@teste.com",
+    "type": "admin",
+    "password": "1234"
+}
+
+
 
 ## :dart: Passos
 
@@ -47,7 +63,7 @@ O sistema é composto por 6 enndpoints diferentes:
 :heavy_check_mark: Criar os modulos de autenticação;\
 :heavy_check_mark: Geração do access token;\
 :heavy_check_mark: Validação com o token;\
-:heavy_check_mark: Bloquear todas as rotas sem o token;\
+:heavy_check_mark: Bloquear todas as rotas sem o token;
 
 ## :rocket: Tecnologias
 
