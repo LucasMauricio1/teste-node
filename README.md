@@ -1,73 +1,93 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h1 align="center">Teste feito em NestJS🚀</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> O projeto é um cadastro de usuários com diferentes endpoints contendo Get, Post, Path e Delete. Além de autenticação via Bearer Token.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## :page_facing_up: Explicação
 
-## Description
+Optei por facilitar o acesso as rotas e ao token deixando tudo já mockado no código sem a necessidade de configurar variáveis de ambiente.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Os DTOs são feitos para validar as requisições via body.
 
-## Installation
+Os dados são armazenados em uma constante chamada usersData, ela já vem com um usuário admin cadastrado:
+{
+    id: 1,
+    name: 'admin',
+    email: 'admin@spsgroup.com.br',
+    type: 'admin',
+    password: '1234',
+}
+
+Os services são responsáveis por tomar as decisões, quando acionados eles vão buscar, criar, deletar ou apagar dados dependendo da vontade do usuário.
+
+Os controllers vão ser os responsaveis de diferencias as requisições, seja elas get, post, etc...
+Além disso é nos controller que são feitas as validações do body e também do retorno para o usuário, e caso o service pegue algum erro, é o controller o responsável por dizer isso ao usuário.
+
+Por fim a pasta strategies ficou responsável por toda a lógica da autorrização com o token gerado no login.
+
+## 📁 Paginas
+
+O sistema é composto por 6 enndpoints diferentes:
+
+- **Login: POST /auth** Nesta página, os usuários podem inserir seus dados cadastrados (email e senha) e fazer login para obter o token.
+- **Cadastro: POST /user** Nesta página, os usuários admin podem criar novos usuários.
+- **Listar todos os usuários: POST /user/:userId** Aqui você consegue a listagem de todos os usuários cadastrados no sistema.
+- **Listar um usuário: POST /user/:userId** Nesta pagina você vai obter os dados de um usuário específico passando seu ID.
+- **Editar um usuário: Path /user/:userId** Aqui você consegue editar seu usuário todo ou somente um atributo dele.
+- **Apagar um usuário: Delete /user/:userId** Esta ultima request permitira ao usuário logado deletar qualquer usuário pelo ID..
+
+## :dart: Passos
+
+:heavy_check_mark: Rota de cadastro;\
+:heavy_check_mark: Rota de buscar todos usuários;\
+:heavy_check_mark: Rota de buscar um usuário específico;\
+:heavy_check_mark: Rota de deletar um usuário;\
+:heavy_check_mark: Rota de editar um usuário;\
+:heavy_check_mark: Validação no email;\
+:heavy_check_mark: Validar o retorno ao usuário;\
+:heavy_check_mark: Criar os modulos de autenticação;\
+:heavy_check_mark: Geração do access token;\
+:heavy_check_mark: Validação com o token;\
+:heavy_check_mark: Bloquear todas as rotas sem o token;\
+
+## :rocket: Tecnologias
+
+As seguintes ferramentas foram utilizadas neste projeto:
+
+- [NestJs](https://docs.nestjs.com)
+- [TypeScript](https://www.typescriptlang.org)
+- [JWT Token](https://docs.nestjs.com/security/authentication)
+- [Class Validator](https://docs.nestjs.com/techniques/validation)
+
+## :closed_book: Requisitos ##
+
+Antes de começar, você precisa ter [Git](https://git-scm.com) e [Node](https://nodejs.org/en/) instalados em seu computador.
+
+## :checkered_flag: Getting Started ##
 
 ```bash
-$ npm install
+# Clone o projeto
+$ git clone https://github.com/LucasMauricio1/teste-node
+# Accesso
+$ cd teste-node
+# Instalando dependencias
+$ yarn ou npm i
+# Rodando o comando
+$ yarn run start:dev ou npm run start:dev
+# O servidor iniciará na porta: <http://localhost:3000>
 ```
+## 🤝 Contribuidores
 
-## Running the app
+Queremos agradecer às seguintes pessoas que contribuíram para este projeto:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/122059282?s=400&u=96bc9300d660f1b489efcfb0a557ab08a6298c99&v=4" width="100px;" alt="Lucas Mauricio"/><br>
+        <sub>
+          <b>Lucas Maurício</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>

@@ -13,6 +13,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return { userId: payload.userId, type: payload.type }; // Aqui você pode personalizar a validação do token JWT, por exemplo, verificando se o usuário existe no banco de dados
+    return { userId: payload.userId, type: payload.type };
   }
 }
