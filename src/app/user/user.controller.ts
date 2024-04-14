@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,8 +16,10 @@ import { CreateUserDto } from './dto/createUser';
 import { UserService } from './user.service';
 import { User } from './entity/userEntity';
 import { ReturnUserDto } from './dto/returnUser.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

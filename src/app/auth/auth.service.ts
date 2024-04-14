@@ -15,7 +15,7 @@ export class AuthService {
       return null;
     }
     if (user.password === loginDto.password) {
-      const payload = { userId: user.id };
+      const payload = { userId: user.id, type: user.type };
 
       const accessToken = this.jwtService.sign(payload);
 
