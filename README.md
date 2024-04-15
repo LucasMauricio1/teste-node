@@ -4,7 +4,7 @@
 
 ## :page_facing_up: Explicação
 
-Optei por facilitar o acesso as rotas e ao token deixando tudo já mockado no código sem a necessidade de configurar variáveis de ambiente.
+Coloquei todas as configurações no arquivo .env mas não coloquei no gitingore para facilitar o uso da api.
 
 Os DTOs são feitos para validar as requisições via body.
 
@@ -30,7 +30,7 @@ O sistema é composto por 6 endpoints diferentes:
 
 - **Login: POST /auth** Nesta página, os usuários podem inserir seus dados cadastrados (email e senha) e fazer login para obter o token.
 - **Cadastro: POST /user** Nesta página, os usuários admin podem criar novos usuários.
-- **Listar todos os usuários: POST /user/:userId** Aqui você consegue a listagem de todos os usuários cadastrados no sistema.
+- **Listar todos os usuários: POST /user** Aqui você consegue a listagem de todos os usuários cadastrados no sistema.
 - **Listar um usuário: POST /user/:userId** Nesta pagina você vai obter os dados de um usuário específico passando seu ID.
 - **Editar um usuário: Path /user/:userId** Aqui você consegue editar seu usuário todo ou somente um atributo dele.
 - **Apagar um usuário: Delete /user/:userId** Esta ultima request permitira ao usuário logado deletar qualquer usuário pelo ID..
@@ -89,7 +89,7 @@ $ cd teste-node
 $ yarn ou npm i
 # Rodando o comando
 $ yarn run start:dev ou npm run start:dev
-# O servidor iniciará na porta: <http://localhost:3000>
+# O servidor iniciará na porta: <http://localhost:3333>
 ```
 ## 🤝 Contribuidores
 
