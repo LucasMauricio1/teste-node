@@ -10,8 +10,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     UserModule,
     JwtModule.registerAsync({
       useFactory: () => ({
-        secret: 'sdfjop390423jtj3fpfweo432t4op6', // deixei o secret aqui para facilitar
-        signOptions: { expiresIn: '7d' },
+        secret: process.env.SECRET_KEY,
+        signOptions: { expiresIn: process.env.EXPIRES_IN },
       }),
     }),
   ],
